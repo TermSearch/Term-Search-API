@@ -1,0 +1,31 @@
+{
+  "name": "tmxAPI",
+  "private": true,
+  "version": "0.0.0",
+  "description": "a Sails application",
+  "keywords": [],
+  "dependencies": {
+    "ejs": "^2.4.1",
+    "include-all": "~0.1.6",
+    "rc": "1.0.1",
+    "sails": "~0.12.1",
+    "sails-disk": "~0.10.9",
+    "sails-mongo": "^0.12.0"
+  },
+  "scripts": {
+    "debug": "node debug app.js",
+    "start": "node app.js"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vnglst/tmxAPI.git"
+  },
+  "author": "vnglst",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vnglst/tmxAPI/issues"
+  },
+  "homepage": "https://github.com/vnglst/tmxAPI#readme",
+  "devDependencies": {}
+}
