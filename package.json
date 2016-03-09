@@ -5,6 +5,7 @@
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
+    "connect-mongo": "0.8.2",
     "ejs": "^2.4.1",
     "include-all": "~0.1.6",
     "rc": "1.0.1",
