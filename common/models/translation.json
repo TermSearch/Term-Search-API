@@ -1,0 +1,23 @@
+{
+  "name": "translation",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "docNo": {
+      "type": "string"
+    },
+    "DE-DE": {
+      "type": "string"
+    },
+    "NL-NL": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
