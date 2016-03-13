@@ -1,44 +1,64 @@
 module.exports = function (Translation) {
 
-	Translation.status = function (cb) {
+	Translation.textsearch = function (searchPhrase, limit, skip, next) {
+		// Get direct access to MongodDB collection methods
 		var TranslationCollection = Translation.dataSource.connector.collection('translation');
+		// First get the count for the query
 		TranslationCollection.find({
-				$text: {
-					$search: 'Anlage'
-				}
-			})
-      .sort({ "_id": 1}).skip(0).limit(100)
-			.toArray(
-				function (err, count) {
-					console.log(count);
-          var response = count;
-          cb(null, response);
-				});
-
-		// var currentDate = new Date();
-		// var currentHour = currentDate.getHours();
-		// var OPEN_HOUR = 6;
-		// var CLOSE_HOUR = 20;
-		// console.log('Current hour is ' + currentHour);
-		// var response;
-		// if (currentHour > OPEN_HOUR && currentHour < CLOSE_HOUR) {
-		// 	response = 'We are open for business.';
-		// } else {
-		// 	response = 'Sorry, we are closed. Open daily from 6am to 8pm.';
-		// }
-
-
+			$text: {
+				$search: searchPhrase
+			}
+		}).count(function (err, count) {
+			// Then get the results with limit + skip
+			TranslationCollection.find({
+					$text: {
+						$search: searchPhrase
+					}
+				})
+				.sort({
+					"_id": 1
+				}).skip(skip).limit(limit)
+				.toArray(
+					function (err, results) {
+						// Return cb with results + count
+						next(err, {
+							totalResults: count,
+							results: results
+						});
+					});
+		});
 	};
 
 	Translation.remoteMethod(
-		'status', {
+		'textsearch', {
+			description: 'FullText search',
+			accepts: [
+				{
+					arg: 'searchPhrase',
+					type: 'string',
+					required: true,
+					description: 'Phrase to search for'
+				},
+				{
+					arg: 'limit',
+					type: 'number',
+					required: true,
+					description: 'How many results to return'
+				},
+				{
+					arg: 'skip',
+					type: 'number',
+					required: true,
+					description: 'How many results to skip'
+				}
+        ],
 			http: {
 				path: '/textsearch',
 				verb: 'get'
 			},
 			returns: {
-				arg: 'status',
-				type: 'string'
+				arg: 'results',
+				type: 'object'
 			}
 		}
 	);
