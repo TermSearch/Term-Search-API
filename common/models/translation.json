@@ -1,5 +1,6 @@
 {
   "name": "translation",
+  "plural": "translations",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {

@@ -1,0 +1,37 @@
+{
+  "name": "dictentry",
+  "plural": "dictentries",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "required": true
+    },
+    "subjectFields": {
+      "type": [
+        "number"
+      ]
+    },
+    "note": {
+      "type": "string"
+    },
+    "de": {
+      "type": "string",
+      "required": true
+    },
+    "nl": {
+      "type": [
+        "string"
+      ],
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

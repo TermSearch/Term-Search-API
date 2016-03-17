@@ -35,5 +35,9 @@
   "translation": {
     "dataSource": "mongoDs",
     "public": true
+  },
+  "dictentry": {
+    "dataSource": "mongoDs",
+    "public": true
   }
 }
