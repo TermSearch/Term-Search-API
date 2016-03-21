@@ -7,7 +7,7 @@
     "validateUpsert": true
   },
   "properties": {
-    "id": {
+    "termID": {
       "type": "string",
       "required": true
     },
