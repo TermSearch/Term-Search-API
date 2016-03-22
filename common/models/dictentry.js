@@ -8,10 +8,11 @@ module.exports = function (Dictentry) {
 	Dictentry.startsWith = function (term, subjectFieldStr, limit, skip, cb) {
 
     const regexQuery = new RegExp('^' + term, 'i');
-		// Regex queries not very fast, maybe use this for more speed?
+
+		// Regex queries are not very fast, maybe someday use this for more speed?
 		// or: [
-		//   {de: {like: '^Koen'}},
-		//   {de: {like: '^koen'}}
+		//   {de: {like: '^Test'}},
+		//   {de: {like: '^test'}}
 		//   ]
 
 		const whereQuery = {
@@ -19,7 +20,7 @@ module.exports = function (Dictentry) {
 		}
 
 		if (subjectFieldStr != undefined) {
-      // Convert the comma seperated string to an array of numbers
+      // Convert the comma seperated string to an array of subjectField numbers
       const subjectFieldNrArr = SubjectField.toNrArr(subjectFieldStr);
       // inq = or --> returns elements with any of the subjectfields in the array
       whereQuery.subjectFields = {
@@ -54,7 +55,7 @@ module.exports = function (Dictentry) {
 					arg: 'term',
 					type: 'string',
 					required: true,
-					description: 'Term to search for'
+					description: 'Term string to search for'
         },
 				{
 					arg: 'subjectFieldStr',
