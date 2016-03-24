@@ -6,6 +6,8 @@ const transformations = require('../transformations/transformations');
 module.exports = function (Dictentry) {
 
 	Dictentry.startsWith = function (term, subjectFieldStr, limit, skip, cb) {
+		// Use ES6 default parameters for this as soon as available
+		subjectFieldStr = subjectFieldStr || false;
 
     const regexQuery = new RegExp('^' + term, 'i');
 
@@ -19,7 +21,7 @@ module.exports = function (Dictentry) {
 			de: regexQuery
 		}
 
-		if (subjectFieldStr != undefined) {
+		if (subjectFieldStr) {
       // Convert the comma seperated string to an array of subjectField numbers
       const subjectFieldNrArr = SubjectField.toNrArr(subjectFieldStr);
       // inq = or --> returns elements with any of the subjectfields in the array
