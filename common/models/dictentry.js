@@ -6,7 +6,8 @@ const transformations = require('../transformations/transformations');
 module.exports = function (Dictentry) {
 
 	Dictentry.startsWith = function (term, subjectFieldStr, limit, skip, cb) {
-		// Use ES6 default parameters for this as soon as available
+		
+		// Use ES6 default parameters for this as soon as available in Node 6
 		subjectFieldStr = subjectFieldStr || false;
 
     const regexQuery = new RegExp('^' + term, 'i');
