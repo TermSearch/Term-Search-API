@@ -5,10 +5,9 @@ const transformations = require('../transformations/transformations');
 
 module.exports = function (Dictentry) {
 
-	Dictentry.startsWith = function (term, subjectFieldStr, limit, skip, cb) {
-		
+	Dictentry.startsWith = function (term, subjectFields, limit, skip, cb) {
 		// Use ES6 default parameters for this as soon as available in Node 6
-		subjectFieldStr = subjectFieldStr || false;
+		subjectFields = subjectFields || false;
 
     const regexQuery = new RegExp('^' + term, 'i');
 
@@ -22,23 +21,26 @@ module.exports = function (Dictentry) {
 			de: regexQuery
 		}
 
-		if (subjectFieldStr) {
+		if (subjectFields) {
       // Convert the comma seperated string to an array of subjectField numbers
-      const subjectFieldNrArr = SubjectField.toNrArr(subjectFieldStr);
-      // inq = or --> returns elements with any of the subjectfields in the array
-      whereQuery.subjectFields = {
-				inq: subjectFieldNrArr
-			}
+      const subjectFieldNrArr = SubjectField.toNrArr(subjectFields);
+			// Map all subjectFields to AND query
+			const andQuery = subjectFieldNrArr.map( nr => ({ subjectFields: nr }) );
+			// Add to whereQuery
+      whereQuery.and = andQuery;
     }
 
+		// Build total query
 		const query = {
 			where: whereQuery,
 			limit: limit,
       skip: skip
 		};
 
+		// First do a count with only the whereQuery
 		Dictentry.count(whereQuery)
 			.then(count => {
+				// Then execute the actual search query
 				Dictentry.find(query)
 					.then(transformations.resolveSubjectFields)
 					.then(dictentries => {
@@ -61,7 +63,7 @@ module.exports = function (Dictentry) {
 					description: 'Term string to search for'
         },
 				{
-					arg: 'subjectFieldStr',
+					arg: 'subjectFields',
 					type: 'string',
 					required: false,
 					description: 'Subjectfield to search for'
