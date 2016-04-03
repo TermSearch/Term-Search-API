@@ -1,6 +1,9 @@
 {
   "name": "dictentry",
   "plural": "dictentries",
+  "mongodb": {
+    "collection": "dictentries"
+  },
   "base": "PersistedModel",
   "idInjection": true,
   "options": {

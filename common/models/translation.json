@@ -1,6 +1,9 @@
 {
   "name": "translation",
   "plural": "translations",
+  "mongodb": {
+    "collection": "translations"
+  },
   "base": "PersistedModel",
   "idInjection": true,
   "options": {

@@ -21,6 +21,8 @@ module.exports = function (Dictentry) {
 			de: regexQuery
 		}
 
+		console.log('Search query: ' + term);
+
 		if (subjectFields) {
       // Convert the comma seperated string to an array of subjectField numbers
       const subjectFieldNrArr = SubjectField.toNrArr(subjectFields);

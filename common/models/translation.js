@@ -2,7 +2,7 @@ module.exports = function (Translation) {
 
 	Translation.textsearch = function (searchPhrase, limit, skip, next) {
 		// Get direct access to MongodDB collection methods
-		var TranslationCollection = Translation.dataSource.connector.collection('translation');
+		var TranslationCollection = Translation.dataSource.connector.collection('translations');
 		// First get the count for the query
 		TranslationCollection.find({
 			$text: {
