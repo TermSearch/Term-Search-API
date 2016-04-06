@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node .",
     "pretest": "jshint .",
-    "posttest": "nsp check"
+    "posttest": "nsp check",
+    "deploy": "pm2 deploy production"
   },
   "dependencies": {
     "compression": "^1.0.3",
