@@ -1,8 +1,8 @@
 module.exports = function (Translation) {
 
-	Translation.textsearch = function (searchPhrase, limit, skip, next) {
+	Translation.textSearch = function (searchPhrase, limit, skip, next) {
 		// Get direct access to MongodDB collection methods
-		var TranslationCollection = Translation.dataSource.connector.collection('translations');
+		var TranslationCollection = Translation.dataSource.connector.collection('translation');
 		// First get the count for the query
 		TranslationCollection.find({
 			$text: {
@@ -30,7 +30,7 @@ module.exports = function (Translation) {
 	};
 
 	Translation.remoteMethod(
-		'textsearch', {
+		'textSearch', {
 			description: 'FullText search',
 			accepts: [
 				{
@@ -53,7 +53,7 @@ module.exports = function (Translation) {
 				}
         ],
 			http: {
-				path: '/textsearch',
+				path: '/textSearch',
 				verb: 'get'
 			},
 			returns: {
