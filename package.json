@@ -27,5 +27,6 @@
     "type": "",
     "url": ""
   },
+  "license": "MIT",
   "description": "API for Term Search"
 }
