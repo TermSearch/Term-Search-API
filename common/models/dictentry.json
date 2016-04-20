@@ -48,6 +48,13 @@
       "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "startsWith"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "liveSearch"
     }
   ],
   "methods": {}
