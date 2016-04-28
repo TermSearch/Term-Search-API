@@ -2,6 +2,10 @@
   "name": "term-search-api",
   "version": "1.0.0",
   "main": "server/server.js",
+  "engineStrict" : true,
+  "engines": {
+    "node": ">=6.0"
+  },
   "scripts": {
     "start": "node .",
     "pretest": "jshint .",

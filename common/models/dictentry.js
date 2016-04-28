@@ -1,19 +1,17 @@
 'use strict';
 
 const SubjectField = require('../lib/SubjectField');
-const transformations = require('../transformations/transformations');
+const dictEntryHelper = require('../helpers/dictEntryHelper');
 
 module.exports = function (Dictentry) {
 
-	Dictentry.liveSearch = function (term, subjectFields, limit, skip, cb) {
-		// Use ES6 default parameters for this as soon as available in Node 6
-		subjectFields = subjectFields || false;
+	Dictentry.liveSearch = function (term, subjectFields = false, limit, skip, cb) {
 
 		const whereQuery = {
 			de: {like: '^'+term } // live search query optimised for speed, case sensitive
 		}
 
-		console.time(term);
+		console.time('Q: '+term+' - Subject: '+subjectFields);
 
 		if (subjectFields) {
       // Convert the comma seperated string to an array of subjectField numbers
@@ -37,7 +35,7 @@ module.exports = function (Dictentry) {
 			.then(count => {
 				// Then execute the actual search query
 				Dictentry.find(query)
-					.then(transformations.resolveSubjectFields)
+					.then(dictEntryHelper.resolveSubjectFields)
 					.then(dictentries => {
 						cb(null, {
 							count,
@@ -45,14 +43,12 @@ module.exports = function (Dictentry) {
 						});
 					})
 					.then( () => {
-						console.timeEnd(term); // log query time
+						console.timeEnd('Q: '+term+' - Subject: '+subjectFields); // log query time
 					})
 			});
 	};
 
-	Dictentry.startsWith = function (term, subjectFields, limit, skip, cb) {
-		// Use ES6 default parameters for this as soon as available in Node 6
-		subjectFields = subjectFields || false;
+	Dictentry.startsWith = function (term, subjectFields = false, limit, skip, cb) {
 
     const regexQuery = new RegExp('^' + term, 'i');
 
@@ -90,7 +86,7 @@ module.exports = function (Dictentry) {
 			.then(count => {
 				// Then execute the actual search query
 				Dictentry.find(query)
-					.then(transformations.resolveSubjectFields)
+					.then(dictEntryHelper.resolveSubjectFields)
 					.then(dictentries => {
 						cb(null, {
 							count,
