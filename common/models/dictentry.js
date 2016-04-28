@@ -12,8 +12,6 @@ module.exports = function (Dictentry) {
 			de: {like: '^'+term }
 		};
 
-		console.time('Q: '+term+' - Subject: '+subjectFields);
-
 		if (subjectFields) {
       // Convert the comma seperated string to an array of subjectField numbers
       const subjectFieldNrArr = SubjectField.toNrArr(subjectFields);
@@ -39,10 +37,6 @@ module.exports = function (Dictentry) {
 		    cb(null, {
 		      dictentries
 		    });
-		  })
-		  .then(() => {
-		    // log query time
-		    console.timeEnd('Q: ' + term + ' - Subject: ' + subjectFields);
 		  });
 	};
 
@@ -59,8 +53,6 @@ module.exports = function (Dictentry) {
 		const whereQuery = {
 			de: regexQuery
 		};
-
-		console.time('Q: '+term+' - Subject: '+subjectFields);
 
 		if (subjectFields) {
       // Convert the comma seperated string to an array of subjectField numbers
@@ -90,10 +82,6 @@ module.exports = function (Dictentry) {
 							count,
 							dictentries
 						});
-					})
-					.then( () => {
-						// log query time
-						console.timeEnd('Q: '+term+' - Subject: '+subjectFields);
 					});
 			});
 	};
