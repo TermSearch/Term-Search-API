@@ -42,17 +42,16 @@ module.exports = function (Dictentry) {
 
 	Dictentry.startsWith = function (term, subjectFields = false, limit = 10, skip = 0, cb) {
 
-    const regexQuery = new RegExp('^' + term, 'i');
-
-		// Regex queries are not very fast, maybe someday use this for more speed?
-		// or: [
-		//   {de: {like: '^Test'}},
-		//   {de: {like: '^test'}}
-		//   ]
-
 		const whereQuery = {
-			de: regexQuery
+			de: {like: '^'+term }
 		};
+
+		// Regex query, slower but more accurate?
+		// const regexQuery = new RegExp('^' + term, 'i');
+		// const whereQuery = {
+		// 	de: regexQuery
+		// };
+
 
 		if (subjectFields) {
       // Convert the comma seperated string to an array of subjectField numbers
